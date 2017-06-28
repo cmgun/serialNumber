@@ -1,0 +1,38 @@
+server:
+  port: 8085
+  context-path: /
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: cmgun
+    driverClassName: com.mysql.jdbc.Driver
+  session:
+    store-type: redis
+  redis:
+    host: localhost
+
+logging:
+  level:
+    root: INFO
+
+mybatis:
+  mapper-locations: classpath:sql/mapper/*.xml
+
+serialNumber:
+  # 序列号生成器配置，格式：4位前缀 + 8位日期 + 6位流水号，限制长度必须为18位，目前长度不支持配置
+  # 是否开启:true;false
+  open: true
+  # 生成模式：db；redis; default(乱序模式)
+  mode: redis
+  # 序列号默认前缀
+  prefix: 1000
+  # 序列号备用前缀，当出现重复主键时使用备用序列号生成器生成
+  backupPrefix: 9900
+  # 序列号编号格式
+  numberPattern: 000000
+  # 序列号日期格式
+  datePattern: yyMMddHH
+  # 一般序列号，即没有前缀和日期，起始基数
+  startNum: 1
